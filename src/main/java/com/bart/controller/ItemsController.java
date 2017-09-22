@@ -15,8 +15,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
-@RestController
 @EnableAutoConfiguration
+@RestController
 @RequestMapping("items")
 @Log4j
 public class ItemsController {
@@ -30,12 +30,12 @@ public class ItemsController {
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{itemId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{itemId}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public ResponseEntity<Item> getItem(@PathVariable("itemId") final UUID itemId) {
         return new ResponseEntity<>(itemService.get(itemId), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public ResponseEntity<List<Item>> getItems() {
         final List<Item> itemList = itemService.getAll();
         return new ResponseEntity<>(itemList, HttpStatus.OK);

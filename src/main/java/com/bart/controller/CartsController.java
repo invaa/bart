@@ -20,8 +20,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
-@RestController
 @EnableAutoConfiguration
+@RestController
 @RequestMapping("carts")
 @Log4j
 public class CartsController {
@@ -41,7 +41,7 @@ public class CartsController {
         return new ResponseEntity<>(newCart, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{cartId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{cartId}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public ResponseEntity<Cart> getCart(@PathVariable("cartId") final UUID cartId) {
         return new ResponseEntity<>(cartRepository.getOne(cartId), HttpStatus.OK);
     }
@@ -64,13 +64,13 @@ public class CartsController {
         return new ResponseEntity<>(cartItem, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public ResponseEntity<List<Cart>> getCarts() {
         final List<Cart> cartList = cartRepository.findAll();
         return new ResponseEntity<>(cartList, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{cartId}/balance", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{cartId}/balance", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public ResponseEntity<BalanceDto> getCartBalance(@PathVariable("cartId") final UUID cartId) throws CartException {
         return new ResponseEntity<>(cartService.getBalance(cartId), HttpStatus.OK);
     }
